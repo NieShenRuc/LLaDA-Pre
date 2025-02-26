@@ -2,13 +2,13 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2502.09992-red.svg)](https://arxiv.org/abs/2502.09992)
 [![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Base%20-FFEB3B)](https://huggingface.co/GSAI-ML/LLaDA-8B-Base)
 [![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Instruct%20-FFEB3B)](https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct)
-[![deploy](https://img.shields.io/badge/Zhihu-知乎-blue)](https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct)
+[![deploy](https://img.shields.io/badge/Zhihu-知乎-blue)](https://zhuanlan.zhihu.com/p/24214732238)
 
 We introduce LLaDA, a diffusion model with an unprecedented 8B scale, trained entirely from scratch, 
 rivaling LLaMA3 8B in performance.
 
 <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 40%" />
+    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 60%" />
 </div>
 
 
