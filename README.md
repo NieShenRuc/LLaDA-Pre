@@ -48,9 +48,20 @@ and has open-sourced the training framework.
 ## FAQ
 Here, we address some common questions about LLaDA.
 
+### 0. How do I train my own LLaDA?
+Please refer to [GUIDELINES.md](GUIDELINES.md) for the guidelines. 
+You can also refer to [SMDM](https://github.com/ML-GSAI/SMDM), which follows the same training 
+process as LLaDA and has open-sourced its code.
+
+
 ### 1. What is the difference between LLaDA and BERT?
 
-LLaDA employs a masking ratio that varies randomly between 0 and 1, while BERT uses 
+Our motivation is not to improve BERT, nor to apply image generation methods like [MaskGIT](https://arxiv.org/abs/2202.04200) 
+to text. **Our goal is to explore a theoretically complete language modeling approach — masked diffusion models.** 
+During this process, we simplified the approach and discovered that the loss function of masked diffusion models 
+is related to the loss functions of BERT and MaskGIT. You can find our theoretical research process in Question 7.
+
+Specifically, LLaDA employs a masking ratio that varies randomly between 0 and 1, while BERT uses 
 a fixed ratio. This subtle difference has significant implications. **The training
 objective of LLaDA is an upper bound on the negative log-likelihood of the model 
 distribution, making LLaDA a generative model.** This enables LLaDA to naturally 
