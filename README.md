@@ -28,7 +28,7 @@ and `generate.py` respectively, for conditional likelihood evaluation and condit
 
 You can directly run `python chat.py` to have multi-round conversations with LLaDA-8B-Instruct.
 
-In addition, please refer to our paper and `GUIDELINES.md` for more details about the inference methods.
+In addition, please refer to our paper and [GUIDELINES.md](GUIDELINES.md) for more details about the inference methods.
 
 
 ## Pre-training and Supervised Fine-Tuning
@@ -39,7 +39,7 @@ However, the pre-training and Supervised Fine-Tuning of LLaDA are straightforwar
 you have a codebase for training an autoregressive model, you can modify it to 
 adapt to LLaDA with just a few lines of code.
 
-We provide guidelines for the pre-training and SFT of LLaDA in `GUIDELINES.md`. 
+We provide guidelines for the pre-training and SFT of LLaDA in [GUIDELINES.md](GUIDELINES.md). 
 You can also refer to [SMDM](https://github.com/ML-GSAI/SMDM), which has a similar training process to LLaDA 
 and has open-sourced the training framework.
 
@@ -84,7 +84,7 @@ Recall the development of diffusion models for images, from [DDPM](https://arxiv
 to the [Consistency model](https://arxiv.org/pdf/2410.11081), where sampling speed accelerated nearly 
 1000 times over the course of 4 years. We believe there is significant room for optimization in LLaDA's 
 sampling efficiency as well. Current solutions, including semi-autoregressive sampling (as 
-detailed in `GUIDELINES.md`), can mitigate the fixed context length issue, and 
+detailed in [GUIDELINES.md](GUIDELINES.md)), can mitigate the fixed context length issue, and 
 [consistency distillation](https://arxiv.org/pdf/2502.05415) can reduce the number of sampling steps.
 
 
