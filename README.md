@@ -8,8 +8,8 @@ We introduce LLaDA (<b>L</b>arge <b>La</b>nguage <b>D</b>iffusion with m<b>A</b>
 rivaling LLaMA3 8B in performance.
 
 <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 39%" />
-    <img src="./imgs/LLaDA_vs_LLaMA_chat.svg" style="width: 40%" />
+    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 45%" />
+    <img src="./imgs/LLaDA_vs_LLaMA_chat.svg" style="width: 46%" />
 </div>
 
 
