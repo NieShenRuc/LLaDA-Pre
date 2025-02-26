@@ -51,9 +51,9 @@ Here, we address some common questions about LLaDA.
 #### 1. What is the difference between LLaDA and BERT?
 
 LLaDA employs a masking ratio that varies randomly between 0 and 1, while BERT uses 
-a fixed ratio. This subtle difference has significant implications. *The training
+a fixed ratio. This subtle difference has significant implications. **The training
 objective of LLaDA is an upper bound on the negative log-likelihood of the model 
-distribution, making LLaDA a generative model.* This enables LLaDA to naturally 
+distribution, making LLaDA a generative model.** This enables LLaDA to naturally 
 perform in-context learning, instruction-following, and ensures Fisher consistency 
 for scalability with large datasets and models. You can also find a direct answer 
 to this question in Section 2.1 of our paper.
@@ -75,16 +75,16 @@ Currently, LLaDA's sampling speed is slower than the autoregressive baseline for
 Reducing the number of sampling steps leads to a decrease in performance, as detailed in Appendix B.4 
 and Appendix B.6 of our paper.
 
-In this work, we aim to explore the upper limits of LLaDA's capabilities, *challenging the assumption 
-that the key LLM abilities are inherently tied to autoregressive models*. We will continue 
+In this work, we aim to explore the upper limits of LLaDA's capabilities, **challenging the assumption 
+that the key LLM abilities are inherently tied to autoregressive models**. We will continue 
 to optimize its efficiency in the future. We believe this research approach is reasonable, 
 as verifying the upper limits of diffusion language models' capabilities will provide us with
 more resources and sufficient motivation to optimize efficiency.
 
 Recall the development of diffusion models for images, from [DDPM](https://arxiv.org/abs/2006.11239) 
 to the [Consistency model](https://arxiv.org/pdf/2410.11081), where sampling speed accelerated nearly 
-1000 times over the course of 4 years. We believe there is significant room for optimization in LLaDA's 
-sampling efficiency as well. Current solutions, including semi-autoregressive sampling (as 
+1000 times over the course of 4 years. **We believe there is significant room for optimization in LLaDA's 
+sampling efficiency as well**. Current solutions, including semi-autoregressive sampling (as 
 detailed in [GUIDELINES.md](GUIDELINES.md)), can mitigate the fixed context length issue, and 
 [consistency distillation](https://arxiv.org/pdf/2502.05415) can reduce the number of sampling steps.
 
@@ -98,8 +98,8 @@ the learning rate from 4e-4 to 1e-4.
 
 #### 5. Why is the final answer "72" generated earlier than the intermediate calculation step (e.g., 12 × 4 = 48) in Tab4?
 
-The mask predictor has successfully predicted the reasoning process. However, during the 
-remasking process, the reasoning steps are masked out again. As shown in the figure 
+**The mask predictor has successfully predicted the reasoning process. However, during the 
+remasking process, the reasoning steps are masked out again.** As shown in the figure 
 below, the non-white background represents the model's generation process, while the 
 white-background boxes indicate the predictions made by the mask predictor at each step. 
 We adopt a randomly remasking strategy.
@@ -117,20 +117,20 @@ whereas LLaDA directly utilizes data that contains identity markers.
 LLaDA is built upon our two prior works, [RADD](https://arxiv.org/abs/2406.03736) and 
 [SMDM](https://arxiv.org/abs/2410.18514). 
 
-RADD demonstrated that the training objective of LLaDA serves as an upper bound on the negative 
-log-likelihood of the model’s distribution, a conclusion also supported by [MD4](https://arxiv.org/abs/2406.04329) 
+RADD demonstrated that the **training objective of LLaDA serves as an upper bound on the negative 
+log-likelihood** of the model’s distribution, a conclusion also supported by [MD4](https://arxiv.org/abs/2406.04329) 
 and [MDLM](https://arxiv.org/abs/2406.07524). 
-Furthermore, RADD was the first to theoretically prove that masked diffusion models do not require time t 
-as an input to Transformer. This insight provides the theoretical 
+Furthermore, RADD was the first to theoretically prove that **masked diffusion models do not require time t 
+as an input to Transformer**. This insight provides the theoretical 
 justification for LLaDA’s unmodified use of the Transformer architecture. Lastly, 
-RADD showed that the training objective of masked diffusion models is equivalent to that of 
-any-order autoregressive models, offering valuable insights into how masked diffusion models can 
+RADD showed that **the training objective of masked diffusion models is equivalent to that of 
+any-order autoregressive models**, offering valuable insights into how masked diffusion models can 
 overcome the reversal curse.
 
-SMDM introduces the first scaling law for masked diffusion models and demonstrates that, with the 
+SMDM introduces the first **scaling law** for masked diffusion models and demonstrates that, with the 
 same model size and training data, masked diffusion models can achieve downstream benchmark results 
-on par with those of autoregressive models. Additionally, SMDM presents a simple, unsupervised 
-classifier-free guidance method that greatly improves downstream benchmark performance, which has 
+on par with those of autoregressive models. Additionally, SMDM presents a simple, **unsupervised 
+classifier-free guidance** method that greatly improves downstream benchmark performance, which has 
 been adopted by LLaDA.
 
 
