@@ -1,14 +1,14 @@
 # Large Language Diffusion Models
+[![arXiv](https://img.shields.io/badge/arXiv-2502.09992-red.svg)](https://arxiv.org/abs/2502.09992)
+[![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Base%20-FFEB3B)](https://huggingface.co/GSAI-ML/LLaDA-8B-Base)
+[![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Instruct%20-FFEB3B)](https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct)
+[![deploy](https://img.shields.io/badge/Zhihu-知乎-blue)](https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct)
+
 We introduce LLaDA, a diffusion model with an unprecedented 8B scale, trained entirely from scratch, 
 rivaling LLaMA3 8B in performance.
 
-[![arXiv](https://img.shields.io/badge/arXiv-2502.09992-red.svg)](https://arxiv.org/abs/2502.09992)
-[![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Base%20-blue)](https://huggingface.co/GSAI-ML/LLaDA-8B-Base)
-[![deploy](https://img.shields.io/badge/Huggingface%20-LLaDA_Instruct%20-blue)](https://huggingface.co/GSAI-ML/LLaDA-8B-Instruct)
-
 <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 47.5%" />
-    <img src="./imgs/LLaDA_vs_LLaMA_chat.svg" style="width: 49%;"/>
+    <img src="./imgs/LLaDA_vs_LLaMA.svg" style="width: 40%" />
 </div>
 
 
@@ -26,18 +26,16 @@ model = AutoModel.from_pretrained('GSAI-ML/LLaDA-8B-Base', trust_remote_code=Tru
 We provide `get_log_likelihood()` and `generate()` functions in `get_log_likelihood.py` 
 and `generate.py` respectively, for conditional likelihood evaluation and conditional generation.
 
-In addition, you can directly run `chat.py` to have multi-round conversations with LLaDA-8B-Instruct.
-```angular2html
-python chat.py
-```
+You can directly run `python chat.py` to have multi-round conversations with LLaDA-8B-Instruct.
 
-Please refer to our paper and `GUIDELINES.md` for more details about the inference methods.
+In addition, please refer to our paper and `GUIDELINES.md` for more details about the inference methods.
 
 
 ## Pre-training and Supervised Fine-Tuning
 
-We will not provide the training framework and data as most open-source LLMs do. However, 
-the pre-training and Supervised Fine-Tuning of LLaDA are straightforward. If 
+We will not provide the training framework and data as most open-source LLMs do.
+
+However, the pre-training and Supervised Fine-Tuning of LLaDA are straightforward. If 
 you have a codebase for training an autoregressive model, you can modify it to 
 adapt to LLaDA with just a few lines of code.
 
@@ -49,25 +47,26 @@ and has open-sourced the training framework.
 ## FAQ
 Here, we address some common questions about LLaDA.
 
-#### What is the difference between LLaDA and BERT?
+#### 1. What is the difference between LLaDA and BERT?
+
 LLaDA employs a masking ratio that varies randomly between 0 and 1, while BERT uses 
-a fixed ratio. This subtle difference has significant implications. The training
+a fixed ratio. This subtle difference has significant implications. *The training
 objective of LLaDA is an upper bound on the negative log-likelihood of the model 
-distribution, making LLaDA a generative model. This enables LLaDA to naturally 
+distribution, making LLaDA a generative model.* This enables LLaDA to naturally 
 perform in-context learning, instruction-following, and ensures Fisher consistency 
 for scalability with large datasets and models. You can also find a direct answer 
 to this question in Section 2.1 of our paper.
 
 
-#### What is the relationship between LLaDA and Transformer?
+#### 2. What is the relationship between LLaDA and Transformer?
 Network structure and probabilistic modeling are two distinct approaches that collectively form the 
-foundation of language models. LLaDA, like GPT (and LLaMA, DeepSeek, Claude, etc.), adopts the 
+foundation of language models. LLaDA, like GPT, adopts the 
 Transformer architecture. The key difference lies in the probabilistic modeling approach: GPT 
-(and LLaMA, DeepSeek, Claude, etc.) utilizes an autoregressive next-token prediction method, 
+utilizes an autoregressive next-token prediction method, 
 while LLaDA employs a diffusion model for probabilistic modeling.
 
 
-#### What is the sampling efficiency of LLaDA?
+#### 3. What is the sampling efficiency of LLaDA?
 Currently, LLaDA's sampling speed is slower than the autoregressive baseline for three reasons: 
 1. LLaDA samples with a fixed context length;
 2. LLaDA cannot yet leverage techniques like KV-Cache;
@@ -75,7 +74,8 @@ Currently, LLaDA's sampling speed is slower than the autoregressive baseline for
 Reducing the number of sampling steps leads to a decrease in performance, as detailed in Appendix B.4 
 and Appendix B.6 of our paper.
 
-In this work, we focus on exploring the **upper limits of LLaDA's capabilities**, and we will continue 
+In this work, we aim to explore the upper limits of LLaDA's capabilities, *challenging the assumption 
+that the key LLM abilities are inherently tied to autoregressive models*. We will continue 
 to optimize its efficiency in the future. We believe this research approach is reasonable, 
 as verifying the upper limits of diffusion language models' capabilities will provide us with
 more resources and sufficient motivation to optimize efficiency.
@@ -88,14 +88,14 @@ detailed in `GUIDELINES.md`), can mitigate the fixed context length issue, and
 [consistency distillation](https://arxiv.org/pdf/2502.05415) can reduce the number of sampling steps.
 
 
-#### What is the training stability of LLaDA?
+#### 4. What is the training stability of LLaDA?
 For details on the pre-training process of LLaDA, please refer to Section 2.2 of our paper. 
 During the total pre-training on 2.3T tokens, we encountered a training crash (loss becoming NaN) 
 only once at 1.2T tokens. Our solution was to resume checkpoint and reduce 
 the learning rate from 4e-4 to 1e-4.
 
 
-#### Why is the final answer "72" generated earlier than the intermediate calculation step (e.g., 12 × 4 = 48) in Tab4?
+#### 5. Why is the final answer "72" generated earlier than the intermediate calculation step (e.g., 12 × 4 = 48) in Tab4?
 
 The mask predictor has successfully predicted the reasoning process. However, during the 
 remasking process, the reasoning steps are masked out again. As shown in the figure 
@@ -107,12 +107,12 @@ We adopt a randomly remasking strategy.
     <img src="./imgs/diff_remask.gif" style="width: 80%" />
 </div>
 
-#### Why does LLaDA answer 'Bailing' when asked 'Who are you'?
+#### 6. Why does LLaDA answer 'Bailing' when asked 'Who are you'?
 This is because our pre-training and SFT data were designed for training an autoregressive model, 
 whereas LLaDA directly utilizes data that contains identity markers.
 
 
-#### Our journey in developing LLaDA?
+#### 7. Our journey in developing LLaDA?
 LLaDA is built upon our two prior works, [RADD](https://arxiv.org/abs/2406.03736) and 
 [SMDM](https://arxiv.org/abs/2410.18514). 
 
@@ -120,7 +120,7 @@ RADD demonstrated that the training objective of LLaDA serves as an upper bound 
 log-likelihood of the model’s distribution, a conclusion also supported by [MD4](https://arxiv.org/abs/2406.04329) 
 and [MDLM](https://arxiv.org/abs/2406.07524). 
 Furthermore, RADD was the first to theoretically prove that masked diffusion models do not require time t 
-as an input, unlike continuous diffusion models. This insight provides the theoretical 
+as an input to Transformer. This insight provides the theoretical 
 justification for LLaDA’s unmodified use of the Transformer architecture. Lastly, 
 RADD showed that the training objective of masked diffusion models is equivalent to that of 
 any-order autoregressive models, offering valuable insights into how masked diffusion models can 
