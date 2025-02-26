@@ -48,7 +48,7 @@ and has open-sourced the training framework.
 ## FAQ
 Here, we address some common questions about LLaDA.
 
-#### 1. What is the difference between LLaDA and BERT?
+### 1. What is the difference between LLaDA and BERT?
 
 LLaDA employs a masking ratio that varies randomly between 0 and 1, while BERT uses 
 a fixed ratio. This subtle difference has significant implications. **The training
@@ -59,7 +59,7 @@ for scalability with large datasets and models. You can also find a direct answe
 to this question in Section 2.1 of our paper.
 
 
-#### 2. What is the relationship between LLaDA and Transformer?
+### 2. What is the relationship between LLaDA and Transformer?
 Network structure and probabilistic modeling are two distinct approaches that collectively form the 
 foundation of language models. LLaDA, like GPT, adopts the 
 Transformer architecture. The key difference lies in the probabilistic modeling approach: GPT 
@@ -67,7 +67,7 @@ utilizes an autoregressive next-token prediction method,
 while LLaDA employs a diffusion model for probabilistic modeling.
 
 
-#### 3. What is the sampling efficiency of LLaDA?
+### 3. What is the sampling efficiency of LLaDA?
 Currently, LLaDA's sampling speed is slower than the autoregressive baseline for three reasons: 
 1. LLaDA samples with a fixed context length;
 2. LLaDA cannot yet leverage techniques like KV-Cache;
@@ -89,14 +89,14 @@ detailed in [GUIDELINES.md](GUIDELINES.md)), can mitigate the fixed context leng
 [consistency distillation](https://arxiv.org/pdf/2502.05415) can reduce the number of sampling steps.
 
 
-#### 4. What is the training stability of LLaDA?
+### 4. What is the training stability of LLaDA?
 For details on the pre-training process of LLaDA, please refer to Section 2.2 of our paper. 
 During the total pre-training on 2.3T tokens, we encountered a training crash (loss becoming NaN) 
 only once at 1.2T tokens. Our solution was to resume checkpoint and reduce 
 the learning rate from 4e-4 to 1e-4.
 
 
-#### 5. Why is the final answer "72" generated earlier than the intermediate calculation step (e.g., 12 × 4 = 48) in Tab4?
+### 5. Why is the final answer "72" generated earlier than the intermediate calculation step (e.g., 12 × 4 = 48) in Tab4?
 
 **The mask predictor has successfully predicted the reasoning process. However, during the 
 remasking process, the reasoning steps are masked out again.** As shown in the figure 
@@ -108,12 +108,12 @@ We adopt a randomly remasking strategy.
     <img src="./imgs/diff_remask.gif" style="width: 80%" />
 </div>
 
-#### 6. Why does LLaDA answer 'Bailing' when asked 'Who are you'?
+### 6. Why does LLaDA answer 'Bailing' when asked 'Who are you'?
 This is because our pre-training and SFT data were designed for training an autoregressive model, 
 whereas LLaDA directly utilizes data that contains identity markers.
 
 
-#### 7. Our journey in developing LLaDA?
+### 7. Our journey in developing LLaDA?
 LLaDA is built upon our two prior works, [RADD](https://arxiv.org/abs/2406.03736) and 
 [SMDM](https://arxiv.org/abs/2410.18514). 
 
