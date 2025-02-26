@@ -119,16 +119,17 @@ many sequences are truncated sentences). As a result, during sampling, given a g
 long or short, the Instruct model tends to generate a complete sentence. Unlike the Base model, it does not encounter cases
 where a sentence is only partially generated and needs to be continued.
 
-For fixed-length sampling, if we use low-confidence remasking, we observe that the proportion of `<EOS>` tokens in 
-the generated sentences is excessively high, which significantly degrades the model's performance. However, 
-this issue does not occur when using randomly remasking.
+When performing fixed-length sampling with a high answer length (e.g., greater than 512), 
+we find that low-confidence remasking results in an unusually high proportion of `<EOS>` tokens in 
+the generated sentences, which severely impacts the model's performance. In contrast, this 
+issue does not arise when randomly remasking is used.
 
 Furthermore, since low-confidence remasking achieved better results in the Base model, we also hoped that it could be applied to 
 the Instruct model. We found that combining low-confidence remasking with semi-autoregressive-padding effectively mitigates 
 the issue of generating an excessively high proportion of <EOS> tokens. Moreover, this combination achieves 
 slightly better results than randomly remasking & fixed-length.
 
-You can find more details about the sampling method in Appendix B.3 of our paper.
+You can find more details about the sampling method in our paper.
 
 
 
