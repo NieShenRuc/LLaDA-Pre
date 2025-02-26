@@ -92,7 +92,7 @@ ce_loss = torch.sum(token_loss / answer_lengths[masked_indices]) / input_ids.sha
 
 ## Sampling
 Overall, we categorize LLaDA's sampling process into three types: fixed-length, semi-autoregressive-origin, and semi-autoregressive-padding.
-*It is worth noting that the semi-autoregressive-origin method was not mentioned in our paper, nor did we provide the corresponding code*. 
+**It is worth noting that the semi-autoregressive-origin method was not mentioned in our paper, nor did we provide the corresponding code**. 
 However, we include it here because we believe that sharing both our failures and insights from the exploration process is valuable.
 These three sampling methods are illustrated in the figure below.
 
